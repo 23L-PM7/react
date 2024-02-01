@@ -1,8 +1,9 @@
 import { Card } from "@/components/Card";
+import { Loader } from "@/components/Loader";
 import { useEffect, useState } from "react";
 
 export default function Home() {
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState();
 
   useEffect(() => {
     fetch("https://dev.to/api/articles?username=j471n")
@@ -11,6 +12,8 @@ export default function Home() {
         setArticles(data);
       });
   }, []);
+
+  if (articles === undefined) return <Loader />;
 
   return (
     <>
